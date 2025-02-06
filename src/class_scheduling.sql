@@ -69,11 +69,21 @@ WHERE
 -- 3. Register a member for a class
 -- TODO: Write a query to register a member for a class
 
+/* INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
+VALUES 
+    (7, 11, 'Registered'); */
+
 -- 4. Cancel a class registration
 -- TODO: Write a query to cancel a class registration
 
--- 5. List top 5 most popular classes
+/* DELETE FROM class_attendance
+WHERE
+    class_attendance_id = 15; */
+
+-- 5. List top 3 most popular classes
 -- TODO: Write a query to list top 5 most popular classes
+
+
 
 -- 6. Calculate average number of classes per member
 -- TODO: Write a query to calculate average number of classes per member
