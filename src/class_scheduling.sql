@@ -83,7 +83,50 @@ WHERE
 -- 5. List top 3 most popular classes
 -- TODO: Write a query to list top 5 most popular classes
 
+WITH class_registrations AS (
+    SELECT 
+        cs.schedule_id,
+        cs.class_id,
+        COUNT(ca.attendance_status) AS registration_count
+    FROM 
+        class_schedule AS cs
+    INNER JOIN 
+        class_attendance AS ca
+    ON 
+        ca.schedule_id = cs.schedule_id 
+    GROUP BY 
+        cs.schedule_id, cs.class_id
+) 
 
+SELECT 
+    c.name AS class_name,
+    c.class_id,
+    COALESCE(cr.registration_count, 0) AS registration_count 
+FROM 
+    classes AS c
+LEFT JOIN 
+    class_registrations AS cr
+ON 
+    c.class_id = cr.class_id
+ORDER BY 
+    registration_count DESC
+LIMIT 3;
 
 -- 6. Calculate average number of classes per member
 -- TODO: Write a query to calculate average number of classes per member
+
+WITH classes_count AS (
+    SELECT 
+        COUNT(class_id) AS total_classes
+    FROM
+        classes
+)
+
+SELECT 
+    (cc.total_classes * 1.0) / COUNT(DISTINCT m.member_id) AS average_classes_per_member
+FROM
+    members AS m
+JOIN
+    classes_count AS cc
+
+
