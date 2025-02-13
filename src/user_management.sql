@@ -23,7 +23,7 @@ FROM members;
 
 UPDATE members
 SET 
-    email = 'emily.jones.updted@email.com',
+    email = 'emily.jones.updated@email.com',
     phone_number = '555-9876'
 WHERE
     member_id = 5;
