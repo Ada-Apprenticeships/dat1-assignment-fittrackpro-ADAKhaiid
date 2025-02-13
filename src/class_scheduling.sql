@@ -23,7 +23,9 @@ ON
 INNER JOIN
     classes AS c
 ON 
-    cs.class_id = c.class_id;
+    cs.class_id = c.class_id
+ORDER BY 
+cs.class_id;
 
 -- 2. Find available classes for a specific date
 -- TODO: Write a query to find available classes for a specific date
@@ -69,16 +71,16 @@ WHERE
 -- 3. Register a member for a class
 -- TODO: Write a query to register a member for a class
 
-/* INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
+INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
 VALUES 
-    (7, 11, 'Registered'); */
+    (7, 11, 'Registered'); 
 
 -- 4. Cancel a class registration
 -- TODO: Write a query to cancel a class registration
 
-/* DELETE FROM class_attendance
+DELETE FROM class_attendance
 WHERE
-    class_attendance_id = 15; */
+    class_attendance_id = 15; 
 
 -- 5. List top 3 most popular classes
 -- TODO: Write a query to list top 5 most popular classes
@@ -115,18 +117,10 @@ LIMIT 3;
 -- 6. Calculate average number of classes per member
 -- TODO: Write a query to calculate average number of classes per member
 
-WITH classes_count AS (
-    SELECT 
-        COUNT(class_id) AS total_classes
-    FROM
-        classes
-)
-
-SELECT 
-    (cc.total_classes * 1.0) / COUNT(DISTINCT m.member_id) AS average_classes_per_member
-FROM
-    members AS m
-JOIN
-    classes_count AS cc
-
-
+SELECT
+    ROUND(
+        (COUNT(CASE WHEN ca.attendance_status = 'Attended' THEN 1 END) * 1.0) /
+        (SELECT COUNT(*) FROM members), 2) 
+    AS avg_classes_per_member
+FROM 
+    class_attendance AS ca;
