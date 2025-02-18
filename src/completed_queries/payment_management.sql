@@ -3,13 +3,14 @@
 .mode column
 
 -- Enable foreign key support
+PRAGMA foreign_keys = ON;
 
 -- Payment Management Queries
 
 -- 1. Record a payment for a membership
 -- TODO: Write a query to record a payment for a membership
 
-/* INSERT INTO payments (member_id, amount, payment_date, payment_method, payment_type)
+INSERT INTO payments (member_id, amount, payment_date, payment_method, payment_type)
 VALUES 
 (11, 50.00, '2025-01-30 14:54:10', 'Credit Card', 'Monthly membership fee');
 -- Query was run and added to the payment table */
