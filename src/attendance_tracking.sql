@@ -41,11 +41,14 @@ FROM (
         location_id, 
         strftime('%w', check_in_time) AS day_of_week, 
         COUNT(*) AS visit_count
-    FROM attendance
-    GROUP BY location_id, day_of_week
+    FROM 
+        attendance
+    GROUP BY 
+        location_id, day_of_week
 ) AS vc
 INNER JOIN 
     locations AS l 
 ON 
     l.location_id = vc.location_id
-GROUP BY l.name;
+GROUP BY 
+    l.name;
