@@ -25,7 +25,7 @@ INNER JOIN
 ON 
     cs.class_id = c.class_id
 ORDER BY 
-cs.class_id;
+c   s.class_id;
 
 -- 2. Find available classes for a specific date
 -- TODO: Write a query to find available classes for a specific date
@@ -46,7 +46,8 @@ WITH slots_available AS (
         cs.class_id = c.class_id
     WHERE 
         ca.attendance_status = 'Registered' 
-    GROUP BY cs.schedule_id, c.capacity
+    GROUP BY 
+        cs.schedule_id, c.capacity
 )
 
 SELECT 
