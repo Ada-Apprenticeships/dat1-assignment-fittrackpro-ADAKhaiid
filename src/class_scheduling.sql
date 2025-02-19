@@ -25,7 +25,7 @@ INNER JOIN
 ON 
     cs.class_id = c.class_id
 ORDER BY 
-c   s.class_id;
+    cs.class_id;
 
 -- 2. Find available classes for a specific date
 -- TODO: Write a query to find available classes for a specific date
